@@ -1,57 +1,52 @@
 ﻿using System;
-using System.Xml;
 
-namespace LCA
+namespace BinaryTree
 {
     public class BinaryTree
     {
-        private int data;
-        private BinaryTree lesserTree;
-        private BinaryTree greaterTree;
+        public int Data;
+        public BinaryTree LesserTree;
+        public BinaryTree GreaterTree;
 
-        private BinaryTree(int data, BinaryTree lesserTree, BinaryTree greaterTree)
+        public BinaryTree(int data, BinaryTree lesserTree, BinaryTree greaterTree)
         {
-            this.data = data;
-            this.lesserTree = lesserTree;
-            this.greaterTree = greaterTree;
+            this.Data = data;
+            this.LesserTree = lesserTree;
+            this.GreaterTree = greaterTree;
         }
-
-        public int getData() { return this.data; }
-
-        public static BinaryTree insert(BinaryTree node, int data)
+        
+        public BinaryTree insert(BinaryTree node, int data)
         {
             if (node == null)
                 return new BinaryTree(data, null, null);
-            if (data < node.data)
-                return insert(node.lesserTree, data);
+            if (data < node.Data)
+                node.LesserTree = insert(node.LesserTree, data);
             else
-                return insert(node.greaterTree, data);
+                node.GreaterTree = insert(node.GreaterTree, data);
+            return node;
         }
         public Boolean contains(BinaryTree node, int data)
         {
             if (node == null)
                 return false;
-            if (node.data == data)
+            if (node.Data == data)
                 return true;
-            if (data < node.data)
-                return contains(node.lesserTree, data);
+            if (data < node.Data)
+                return contains(node.LesserTree, data);
             else
-                return contains(node.greaterTree, data);
+                return contains(node.GreaterTree, data);
         }
 
         public int height(BinaryTree node)
         {
             if (node == null)
                 return 0;
-            return Math.Max(1 + height(node.lesserTree), 1 + height(node.greaterTree));
+            return Math.Max(1 + height(node.LesserTree), 1 + height(node.GreaterTree));
         }
 
-        public static BinaryTree makeTree(int[] data)
+        public static void Main()
         {
-            BinaryTree root = insert(null, data[0]);
-            for (int index = 1; index < data.Length; index++)
-                insert(root, data[index]);
-            return root;
+
         }
     }
 }
