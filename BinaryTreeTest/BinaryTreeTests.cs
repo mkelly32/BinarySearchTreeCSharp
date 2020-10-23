@@ -95,5 +95,26 @@ namespace BinaryTreeTest
             root.insert(root, LesserValue);
             Assert.AreEqual(root.height(root), 2);
         }
+
+        [TestMethod]
+        public void testLowestCommonAncestor()
+        {
+            BinaryTree.BinaryTree root = new BinaryTree.BinaryTree(InitialValue, null, null);
+            root.insert(root, LesserValue);
+            root.insert(root, GreaterValue);
+            root.insert(root, SmallestValue);
+            root.insert(root, SmallValue);
+            root.insert(root, LargestValue);
+            root.insert(root, LargeValue);
+
+            //Test for root == LCA
+            Assert.AreEqual(root.lowestCommonAncestor(root, LesserValue, GreaterValue), root);
+
+            //Test for LesserTree == LCA
+            Assert.AreEqual(root.lowestCommonAncestor(root, SmallestValue, SmallValue), root.LesserTree);
+
+            //Test for GreaterTree == LCA
+            Assert.AreEqual(root.lowestCommonAncestor(root, LargeValue, LargestValue), root.GreaterTree);
+        }
     }
 }

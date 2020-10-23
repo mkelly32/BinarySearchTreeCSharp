@@ -44,6 +44,15 @@ namespace BinaryTree
             return Math.Max(1 + height(node.LesserTree), 1 + height(node.GreaterTree));
         }
 
+        public BinaryTree lowestCommonAncestor(BinaryTree node, int dataA, int dataB)
+        {
+            if (dataA < node.Data && dataB < node.Data)
+                return lowestCommonAncestor(node.LesserTree, dataA, dataB);
+            if (dataA > node.Data && dataB > node.Data)
+                return lowestCommonAncestor(node.GreaterTree, dataA, dataB);
+            return node;
+        }
+
         public static void Main()
         {
 
