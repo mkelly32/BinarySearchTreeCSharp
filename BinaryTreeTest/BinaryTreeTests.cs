@@ -82,7 +82,18 @@ namespace BinaryTreeTest
         [TestMethod]
         public void testHeight()
         {
+            BinaryTree.BinaryTree root = new BinaryTree.BinaryTree(InitialValue, null, null);
 
+            //Test for empty Tree
+            BinaryTree.BinaryTree emptyTree = null;
+            Assert.AreEqual(root.height(emptyTree), 0);
+
+            //Test for  tree size one
+            Assert.AreEqual(root.height(root), 1);
+
+            //Test for treee size two
+            root.insert(root, LesserValue);
+            Assert.AreEqual(root.height(root), 2);
         }
     }
 }
